@@ -1,0 +1,96 @@
+body {
+  background-image: url(../img/Cards\ BG.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+body header {
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body header .create_deck {
+  padding: 35px;
+  font-size: 20px;
+  border: 4px black solid;
+  border-radius: 10px;
+  font-family: fantasy;
+  transition: opacity 2s;
+}
+body main {
+  display: none;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 3rem 18rem 18rem;
+  place-items: center;
+  gap: 20px;
+}
+body main .time {
+  height: 100%;
+  width: 23%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+body main .shuffle {
+  padding: 10px;
+  border: 1px black solid;
+  border-radius: 1rem;
+}
+body main .score {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px black solid;
+  width: 8rem;
+  height: 75%;
+  border-radius: 1rem;
+  background-color: white;
+  padding: 1rem;
+  font-size: xx-large;
+}
+body main .score .points {
+  font-size: large;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: oblique;
+}
+body main .card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: white;
+  width: 12rem;
+  border-radius: 2rem;
+  font-size: 7rem;
+}
+body main .card:before {
+  position: absolute;
+  font-size: 2rem;
+  content: attr(data-value);
+  top: 0.5rem;
+  left: 0.5rem;
+}
+body main .card:after {
+  position: absolute;
+  font-size: 2rem;
+  content: attr(data-value);
+  bottom: 0.5rem;
+  right: 0.5rem;
+  transform: rotate(180deg);
+}
+body main .one {
+  background-image: url(../img/Red.jpeg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+body main .two {
+  background-image: url(../img/Blue.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}/*# sourceMappingURL=style.css.map */
