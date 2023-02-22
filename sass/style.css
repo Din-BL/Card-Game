@@ -5,10 +5,20 @@ body {
   background-size: cover;
 }
 body header {
-  height: 500px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+body header article {
+  background-color: white;
+  width: 35%;
+  padding: 15px;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  border: 4px black solid;
+  font-family: cursive;
+  border-radius: 7px;
 }
 body header .create_deck {
   padding: 35px;
@@ -21,13 +31,14 @@ body header .create_deck {
 body main {
   display: none;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 3rem 18rem 18rem;
+  grid-template-rows: 3rem 14rem 14rem;
   place-items: center;
   gap: 20px;
 }
 body main .time {
   height: 100%;
   width: 23%;
+  font-size: small;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,7 +74,7 @@ body main .card {
   align-items: center;
   height: 100%;
   background-color: white;
-  width: 12rem;
+  width: 10rem;
   border-radius: 2rem;
   font-size: 7rem;
 }

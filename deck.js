@@ -82,8 +82,16 @@ createDeckBtn.addEventListener("click", () => {
     main.style.display = "grid";
   }, 1000);
 });
+// Fix Code
 
+let timer = null;
 shuffle.addEventListener("click", () => {
+  clearTimeout(timer);
+  timer = setTimeout(function () {
+    time.innerHTML = "The Computer Won";
+    console.log("you lose");
+  }, 2000);
+
   htmlRender();
 });
 
