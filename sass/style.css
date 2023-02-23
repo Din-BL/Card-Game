@@ -1,7 +1,5 @@
 body {
-  background-image: url(../img/Cards\ BG.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url(../img/Cards\ BG.jpg) center no-repeat;
   background-size: cover;
 }
 body header {
