@@ -23,7 +23,7 @@ const valueMap = {
 // Elements
 const header = document.querySelector("header");
 const createDeckBtn = document.querySelector(".create_deck");
-const main = document.querySelector("main");
+const section = document.querySelector("section");
 const shuffle = document.querySelector(".shuffle");
 const player_1 = document.querySelector(".one");
 const player_2 = document.querySelector(".two");
@@ -79,7 +79,7 @@ createDeckBtn.addEventListener("click", () => {
 
   setTimeout(() => {
     header.style.display = "none";
-    main.style.display = "grid";
+    section.style.display = "grid";
   }, 1000);
 });
 // Fix Code

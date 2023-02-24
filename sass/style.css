@@ -1,13 +1,18 @@
-body {
-  background: url(../img/Cards\ BG.jpg) center no-repeat;
-  background-size: cover;
+* {
+  margin: 0;
+  box-sizing: border-box;
 }
-body header {
+* main {
+  position: absolute;
+  width: 100%;
+}
+* main header {
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 50px;
 }
-body header article {
+* main header article {
   background-color: white;
   width: 35%;
   padding: 15px;
@@ -18,22 +23,27 @@ body header article {
   font-family: cursive;
   border-radius: 7px;
 }
-body header .create_deck {
-  padding: 35px;
-  font-size: 20px;
-  border: 4px black solid;
+* main header .create_deck {
+  padding: 10px;
+  font-size: 15px;
+  border: 2px black solid;
   border-radius: 10px;
   font-family: fantasy;
-  transition: opacity 2s;
+  transition: 2s;
 }
-body main {
+* main header .create_deck:hover {
+  transform: rotate(360deg) scale(1.5);
+  color: rgb(190, 0, 0);
+}
+* main section {
+  margin-top: 40px;
   display: none;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 3rem 14rem 14rem;
+  grid-template-rows: 40px 185px 185px;
   place-items: center;
   gap: 20px;
 }
-body main .time {
+* main section .time {
   height: 100%;
   width: 23%;
   font-size: small;
@@ -42,12 +52,12 @@ body main .time {
   align-items: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
-body main .shuffle {
+* main section .shuffle {
   padding: 10px;
   border: 1px black solid;
   border-radius: 1rem;
 }
-body main .score {
+* main section .score {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -58,46 +68,46 @@ body main .score {
   border-radius: 1rem;
   background-color: white;
   padding: 1rem;
-  font-size: xx-large;
-}
-body main .score .points {
   font-size: large;
+}
+* main section .score .points {
+  font-size: small;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-style: oblique;
 }
-body main .card {
+* main section .card {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   background-color: white;
-  width: 10rem;
+  width: 8rem;
   border-radius: 2rem;
-  font-size: 7rem;
+  font-size: 5rem;
 }
-body main .card:before {
+* main section .card:before {
   position: absolute;
-  font-size: 2rem;
+  font-size: 28px;
   content: attr(data-value);
   top: 0.5rem;
   left: 0.5rem;
 }
-body main .card:after {
+* main section .card:after {
   position: absolute;
-  font-size: 2rem;
+  font-size: 28px;
   content: attr(data-value);
   bottom: 0.5rem;
   right: 0.5rem;
   transform: rotate(180deg);
 }
-body main .one {
+* main section .one {
   background-image: url(../img/Red.jpeg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-body main .two {
+* main section .two {
   background-image: url(../img/Blue.jpg);
   background-position: center;
   background-repeat: no-repeat;
