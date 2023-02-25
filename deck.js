@@ -82,6 +82,7 @@ createDeckBtn.addEventListener("click", () => {
     section.style.display = "grid";
   }, 1000);
 });
+
 // Fix Code
 
 let timer = null;
