@@ -1,13 +1,13 @@
 // Elements
 
-const header = document.querySelector("header")!;
-const createDeckBtn = document.querySelector(".create_deck")! as HTMLButtonElement;
+// const header = document.querySelector("header")!;
+const deckCreation = document.querySelector(".create_deck")! as HTMLButtonElement;
 const section = document.querySelector("section")!;
 const shuffle = document.querySelector(".shuffle")! as HTMLButtonElement;
-const player_1 = document.querySelector(".one")! as HTMLDivElement;
-const player_2 = document.querySelector(".two")! as HTMLDivElement;
+const playerElement = document.querySelector(".player")! as HTMLDivElement;
+const computerElement = document.querySelector(".computer")! as HTMLDivElement;
 let time = document.querySelector(".time")! as HTMLElement;
-let displayPress = document.querySelector("h4")!;
+let timeLimit = document.querySelector("h4")!;
 
 // Structures
 
@@ -20,12 +20,12 @@ interface Card {
 const VALUES: Array<string> = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 const SUITS: Array<string> = ["♠", "♣", "♥", "♦"];
 let counter = 0;
-let timeLeft = 30;
-let timePress: number | boolean = 5;
+let gameTime = 30;
+let remainingTime = 5;
 let deck: Array<Card> = [];
 let deckFlag: Array<string> = [];
 
-enum ValueMap {
+enum CardValue {
   Two = 2,
   Three,
   Four,
@@ -66,8 +66,8 @@ while (deck.length < 52) {
 
 // Logic
 
-createDeckBtn.addEventListener("click", () => {
-  createDeckBtn.style.opacity = "0";
+deckCreation.addEventListener("click", () => {
+  deckCreation.style.opacity = "0";
   setTimeout(() => {
     time.style.backgroundColor = "white";
     time.style.border = "2px solid black";
@@ -76,69 +76,59 @@ createDeckBtn.addEventListener("click", () => {
   let timer = setInterval(countdown, 1000);
 
   function countdown() {
-    if (!timeLeft || timePress == -1) {
+    if (!gameTime || remainingTime == -1) {
       clearTimeout(timer);
       shuffle.disabled = true;
-      if (player.length > computer.length && !timePress) {
+      if (player.length > computer.length && remainingTime !== -1) {
         time.innerHTML = "You Won!";
       } else {
         time.innerHTML = "The Computer Won";
       }
     } else {
-      time.innerHTML = timeLeft + " seconds remaining";
-      displayPress.childNodes[1].textContent = `${timePress} seconds`;
-      timeLeft--;
-      timePress--;
+      time.innerHTML = gameTime + " seconds remaining";
+      timeLimit.childNodes[1].textContent = `${remainingTime} seconds`;
+      gameTime--;
+      remainingTime--;
     }
   }
 
   setTimeout(() => {
-    header.style.display = "none";
+    section.previousElementSibling?.style.display = "none";
     section.style.display = "grid";
   }, 1000);
-});
-
-shuffle.addEventListener("click", () => {
-  timePress = 5;
-  htmlRender();
 });
 
 const player = deck.slice(0, deck.length / 2);
 const computer = deck.slice(-deck.length / 2);
 
+shuffle.addEventListener("click", () => {
+  remainingTime = 5;
+  htmlRender();
+});
+
 function htmlRender() {
-  function cardRender(element: HTMLDivElement, card: Card[]) {
-    element.style.backgroundImage = "none";
-    const random = Math.floor(Math.random() * card.length);
-    element.innerText = card[random].shape;
-    element.dataset.value = `${card[random].number} ${card[random].shape} `;
-    card[random].color === "black" ? (element.style.color = "black") : (element.style.color = "red");
-    return random;
-  }
-  let random_1 = cardRender(player_1, player);
-  let random_2 = cardRender(player_2, computer);
-
-  // player_1.style.backgroundImage = "none";
-  // const random_1 = Math.floor(Math.random() * player.length);
-  // player_1.innerText = player[random_1].shape;
-  // player_1.dataset.value = `${player[random_1].number} ${player[random_1].shape} `;
-  // player[random_1].color === "black" ? (player_1.style.color = "black") : (player_1.style.color = "red");
-
-  // player_2.style.backgroundImage = "none";
-  // const random_2 = Math.floor(Math.random() * computer.length);
-  // player_2.innerText = computer[random_2].shape;
-  // player_2.dataset.value = `${computer[random_2].number} ${computer[random_2].shape} `;
-  // computer[random_2].color === "black" ? (player_2.style.color = "black") : (player_2.style.color = "red");
-  if (ValueMap[player[random_1].number] === ValueMap[computer[random_2].number]) return;
-  if (ValueMap[player[random_1].number] < ValueMap[computer[random_2].number]) {
-    player.splice(random_1, 1);
-    computer.push(player[random_1]);
-    console.log(player.length);
+  let card_1 = cardRender(playerElement, player);
+  let card_2 = cardRender(computerElement, computer);
+  // --------------
+  // Fix This
+  // --------------
+  if (CardValue[player[card_1].number] === CardValue[computer[card_2].number]) return;
+  if (CardValue[player[card_1].number] < CardValue[computer[card_2].number]) {
+    player.splice(card_1, 1);
+    computer.push(player[card_1]);
   } else {
-    computer.splice(random_2, 1);
-    player.push(computer[random_2]);
-    console.log(computer.length);
+    computer.splice(card_2, 1);
+    player.push(computer[card_2]);
   }
   section.children[3].children[2].textContent = `Player : ${player.length}`;
   section.children[3].children[3].textContent = `Computer : ${computer.length}`;
+}
+
+function cardRender(element: HTMLDivElement, card: Card[]) {
+  element.style.backgroundImage = "none";
+  const random = Math.floor(Math.random() * card.length);
+  element.innerText = card[random].shape;
+  element.dataset.value = `${card[random].number} ${card[random].shape} `;
+  card[random].color === "black" ? (element.style.color = "black") : (element.style.color = "red");
+  return random;
 }

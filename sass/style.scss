@@ -78,7 +78,6 @@
         }
         h4 {
           position: absolute;
-          position: absolute;
           bottom: 145px;
           background: white;
           border-radius: 5px;
@@ -113,17 +112,16 @@
           transform: rotate(180deg);
         }
       }
-      .one {
-        background-image: url(../img/Red.jpeg);
+      .card {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
       }
-      .two {
+      .player {
+        background-image: url(../img/Red.jpeg);
+      }
+      .computer {
         background-image: url(../img/Blue.jpg);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
       }
     }
   }

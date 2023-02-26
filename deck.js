@@ -1,36 +1,36 @@
 "use strict";
 // Elements
-const header = document.querySelector("header");
-const createDeckBtn = document.querySelector(".create_deck");
+// const header = document.querySelector("header")!;
+const deckCreation = document.querySelector(".create_deck");
 const section = document.querySelector("section");
 const shuffle = document.querySelector(".shuffle");
-const player_1 = document.querySelector(".one");
-const player_2 = document.querySelector(".two");
+const playerElement = document.querySelector(".player");
+const computerElement = document.querySelector(".computer");
 let time = document.querySelector(".time");
-let displayPress = document.querySelector("h4");
+let timeLimit = document.querySelector("h4");
 const VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 const SUITS = ["♠", "♣", "♥", "♦"];
 let counter = 0;
-let timeLeft = 30;
-let timePress = 5;
+let gameTime = 30;
+let remainingTime = 5;
 let deck = [];
 let deckFlag = [];
-var ValueMap;
-(function (ValueMap) {
-    ValueMap[ValueMap["Two"] = 2] = "Two";
-    ValueMap[ValueMap["Three"] = 3] = "Three";
-    ValueMap[ValueMap["Four"] = 4] = "Four";
-    ValueMap[ValueMap["Five"] = 5] = "Five";
-    ValueMap[ValueMap["Six"] = 6] = "Six";
-    ValueMap[ValueMap["Seven"] = 7] = "Seven";
-    ValueMap[ValueMap["Eight"] = 8] = "Eight";
-    ValueMap[ValueMap["Nine"] = 9] = "Nine";
-    ValueMap[ValueMap["Ten"] = 10] = "Ten";
-    ValueMap[ValueMap["J"] = 11] = "J";
-    ValueMap[ValueMap["Q"] = 12] = "Q";
-    ValueMap[ValueMap["K"] = 13] = "K";
-    ValueMap[ValueMap["A"] = 14] = "A";
-})(ValueMap || (ValueMap = {}));
+var CardValue;
+(function (CardValue) {
+    CardValue[CardValue["Two"] = 2] = "Two";
+    CardValue[CardValue["Three"] = 3] = "Three";
+    CardValue[CardValue["Four"] = 4] = "Four";
+    CardValue[CardValue["Five"] = 5] = "Five";
+    CardValue[CardValue["Six"] = 6] = "Six";
+    CardValue[CardValue["Seven"] = 7] = "Seven";
+    CardValue[CardValue["Eight"] = 8] = "Eight";
+    CardValue[CardValue["Nine"] = 9] = "Nine";
+    CardValue[CardValue["Ten"] = 10] = "Ten";
+    CardValue[CardValue["J"] = 11] = "J";
+    CardValue[CardValue["Q"] = 12] = "Q";
+    CardValue[CardValue["K"] = 13] = "K";
+    CardValue[CardValue["A"] = 14] = "A";
+})(CardValue || (CardValue = {}));
 class Cards {
     constructor(number, shape, color) {
         this.number = number;
@@ -53,18 +53,18 @@ while (deck.length < 52) {
     deck.push(card);
 }
 // Logic
-createDeckBtn.addEventListener("click", () => {
-    createDeckBtn.style.opacity = "0";
+deckCreation.addEventListener("click", () => {
+    deckCreation.style.opacity = "0";
     setTimeout(() => {
         time.style.backgroundColor = "white";
         time.style.border = "2px solid black";
     }, 1000);
     let timer = setInterval(countdown, 1000);
     function countdown() {
-        if (!timeLeft || timePress == -1) {
+        if (!gameTime || remainingTime == -1) {
             clearTimeout(timer);
             shuffle.disabled = true;
-            if (player.length > computer.length && !timePress) {
+            if (player.length > computer.length && remainingTime !== -1) {
                 time.innerHTML = "You Won!";
             }
             else {
@@ -72,56 +72,48 @@ createDeckBtn.addEventListener("click", () => {
             }
         }
         else {
-            time.innerHTML = timeLeft + " seconds remaining";
-            displayPress.childNodes[1].textContent = `${timePress} seconds`;
-            timeLeft--;
-            timePress--;
+            time.innerHTML = gameTime + " seconds remaining";
+            timeLimit.childNodes[1].textContent = `${remainingTime} seconds`;
+            gameTime--;
+            remainingTime--;
         }
     }
     setTimeout(() => {
-        header.style.display = "none";
+        var _a;
+        (_a = section.previousElementSibling) === null || _a === void 0 ? void 0 : _a.style.display = "none";
         section.style.display = "grid";
     }, 1000);
 });
-shuffle.addEventListener("click", () => {
-    timePress = 5;
-    htmlRender();
-});
 const player = deck.slice(0, deck.length / 2);
 const computer = deck.slice(-deck.length / 2);
+shuffle.addEventListener("click", () => {
+    remainingTime = 5;
+    htmlRender();
+});
 function htmlRender() {
-    function cardRender(element, card) {
-        element.style.backgroundImage = "none";
-        const random = Math.floor(Math.random() * card.length);
-        element.innerText = card[random].shape;
-        element.dataset.value = `${card[random].number} ${card[random].shape} `;
-        card[random].color === "black" ? (element.style.color = "black") : (element.style.color = "red");
-        return random;
-    }
-    let random_1 = cardRender(player_1, player);
-    let random_2 = cardRender(player_2, computer);
-    // player_1.style.backgroundImage = "none";
-    // const random_1 = Math.floor(Math.random() * player.length);
-    // player_1.innerText = player[random_1].shape;
-    // player_1.dataset.value = `${player[random_1].number} ${player[random_1].shape} `;
-    // player[random_1].color === "black" ? (player_1.style.color = "black") : (player_1.style.color = "red");
-    // player_2.style.backgroundImage = "none";
-    // const random_2 = Math.floor(Math.random() * computer.length);
-    // player_2.innerText = computer[random_2].shape;
-    // player_2.dataset.value = `${computer[random_2].number} ${computer[random_2].shape} `;
-    // computer[random_2].color === "black" ? (player_2.style.color = "black") : (player_2.style.color = "red");
-    if (ValueMap[player[random_1].number] === ValueMap[computer[random_2].number])
+    let card_1 = cardRender(playerElement, player);
+    let card_2 = cardRender(computerElement, computer);
+    // --------------
+    // Fix This
+    // --------------
+    if (CardValue[player[card_1].number] === CardValue[computer[card_2].number])
         return;
-    if (ValueMap[player[random_1].number] < ValueMap[computer[random_2].number]) {
-        player.splice(random_1, 1);
-        computer.push(player[random_1]);
-        console.log(player.length);
+    if (CardValue[player[card_1].number] < CardValue[computer[card_2].number]) {
+        player.splice(card_1, 1);
+        computer.push(player[card_1]);
     }
     else {
-        computer.splice(random_2, 1);
-        player.push(computer[random_2]);
-        console.log(computer.length);
+        computer.splice(card_2, 1);
+        player.push(computer[card_2]);
     }
     section.children[3].children[2].textContent = `Player : ${player.length}`;
     section.children[3].children[3].textContent = `Computer : ${computer.length}`;
+}
+function cardRender(element, card) {
+    element.style.backgroundImage = "none";
+    const random = Math.floor(Math.random() * card.length);
+    element.innerText = card[random].shape;
+    element.dataset.value = `${card[random].number} ${card[random].shape} `;
+    card[random].color === "black" ? (element.style.color = "black") : (element.style.color = "red");
+    return random;
 }
