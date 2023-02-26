@@ -1,24 +1,4 @@
 "use strict";
-const VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-const SUITS = ["♠", "♣", "♥", "♦"];
-let counter = 0;
-let deck = [];
-let deckFlag = [];
-const valueMap = {
-    2: 2,
-    3: 3,
-    4: 4,
-    5: 5,
-    6: 6,
-    7: 7,
-    8: 8,
-    9: 9,
-    10: 10,
-    J: 11,
-    Q: 12,
-    K: 13,
-    A: 14,
-};
 // Elements
 const header = document.querySelector("header");
 const createDeckBtn = document.querySelector(".create_deck");
@@ -29,7 +9,30 @@ const player_2 = document.querySelector(".two");
 const status_1 = document.getElementsByClassName("points")[0];
 const status_2 = document.getElementsByClassName("points")[1];
 let time = document.querySelector(".time");
+let displayPress = document.querySelector("h4");
+const VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+const SUITS = ["♠", "♣", "♥", "♦"];
+let counter = 0;
 let timeLeft = 30;
+let timePress = 5;
+let deck = [];
+let deckFlag = [];
+var ValueMap;
+(function (ValueMap) {
+    ValueMap[ValueMap["Two"] = 2] = "Two";
+    ValueMap[ValueMap["Three"] = 3] = "Three";
+    ValueMap[ValueMap["Four"] = 4] = "Four";
+    ValueMap[ValueMap["Five"] = 5] = "Five";
+    ValueMap[ValueMap["Six"] = 6] = "Six";
+    ValueMap[ValueMap["Seven"] = 7] = "Seven";
+    ValueMap[ValueMap["Eight"] = 8] = "Eight";
+    ValueMap[ValueMap["Nine"] = 9] = "Nine";
+    ValueMap[ValueMap["Ten"] = 10] = "Ten";
+    ValueMap[ValueMap["J"] = 11] = "J";
+    ValueMap[ValueMap["Q"] = 12] = "Q";
+    ValueMap[ValueMap["K"] = 13] = "K";
+    ValueMap[ValueMap["A"] = 14] = "A";
+})(ValueMap || (ValueMap = {}));
 class Cards {
     constructor(number, shape, color) {
         this.number = number;
@@ -37,6 +40,7 @@ class Cards {
         this.color = color;
     }
 }
+// Logic
 while (deck.length < 52) {
     counter++;
     let index = Math.floor(Math.random() * VALUES.length);
@@ -58,10 +62,10 @@ createDeckBtn.addEventListener("click", () => {
     }, 1000);
     let timer = setInterval(countdown, 1000);
     function countdown() {
-        if (timeLeft == -1) {
+        if (!timeLeft || !timePress) {
             clearTimeout(timer);
             shuffle.disabled = true;
-            if (player_1_deck.length > player_2_deck.length) {
+            if (player_1_deck.length > player_2_deck.length && timePress) {
                 time.innerHTML = "You Won!";
             }
             else {
@@ -70,7 +74,9 @@ createDeckBtn.addEventListener("click", () => {
         }
         else {
             time.innerHTML = timeLeft + " seconds remaining";
+            displayPress.childNodes[1].textContent = `${timePress} seconds`;
             timeLeft--;
+            timePress--;
         }
     }
     setTimeout(() => {
@@ -78,14 +84,8 @@ createDeckBtn.addEventListener("click", () => {
         section.style.display = "grid";
     }, 1000);
 });
-// Fix Code
-// let timer = null;
 shuffle.addEventListener("click", () => {
-    // clearTimeout(timer);
-    // timer = setTimeout(function () {
-    //   time.innerHTML = "The Computer Won";
-    //   console.log("you lose");
-    // }, 2000);
+    timePress = 5;
     htmlRender();
 });
 const player_1_deck = deck.slice(0, deck.length / 2);
@@ -101,9 +101,9 @@ function htmlRender() {
     player_2.innerText = player_2_deck[random_2].shape;
     player_2.dataset.value = `${player_2_deck[random_2].number} ${player_2_deck[random_2].shape} `;
     player_2_deck[random_2].color === "black" ? (player_2.style.color = "black") : (player_2.style.color = "red");
-    if (valueMap[player_1_deck[random_1].number] === valueMap[player_2_deck[random_2].number])
+    if (ValueMap[player_1_deck[random_1].number] === ValueMap[player_2_deck[random_2].number])
         return;
-    if (valueMap[player_1_deck[random_1].number] < valueMap[player_2_deck[random_2].number]) {
+    if (ValueMap[player_1_deck[random_1].number] < ValueMap[player_2_deck[random_2].number]) {
         let transfer = player_1_deck[random_1];
         player_1_deck.splice(random_1, 1);
         player_2_deck.push(transfer);

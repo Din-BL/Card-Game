@@ -1,3 +1,18 @@
+// Elements
+
+const header = document.querySelector("header")!;
+const createDeckBtn = document.querySelector(".create_deck")! as HTMLButtonElement;
+const section = document.querySelector("section")!;
+const shuffle = document.querySelector(".shuffle")! as HTMLButtonElement;
+const player_1 = document.querySelector(".one")! as HTMLDivElement;
+const player_2 = document.querySelector(".two")! as HTMLDivElement;
+const status_1 = document.getElementsByClassName("points")[0]! as HTMLElement;
+const status_2 = document.getElementsByClassName("points")[1]! as HTMLElement;
+let time = document.querySelector(".time")! as HTMLElement;
+let displayPress = document.querySelector("h4")!;
+
+// Structures
+
 interface Card {
   number: number;
   shape: string;
@@ -7,35 +22,26 @@ interface Card {
 const VALUES: Array<string> = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 const SUITS: Array<string> = ["♠", "♣", "♥", "♦"];
 let counter = 0;
+let timeLeft = 30;
+let timePress = 5;
 let deck: Array<Card> = [];
 let deckFlag: Array<string> = [];
-const valueMap = {
-  2: 2,
-  3: 3,
-  4: 4,
-  5: 5,
-  6: 6,
-  7: 7,
-  8: 8,
-  9: 9,
-  10: 10,
-  J: 11,
-  Q: 12,
-  K: 13,
-  A: 14,
-};
 
-// Elements
-const header = document.querySelector("header");
-const createDeckBtn: Element = document.querySelector(".create_deck");
-const section = document.querySelector("section");
-const shuffle = document.querySelector(".shuffle");
-const player_1 = document.querySelector(".one");
-const player_2 = document.querySelector(".two");
-const status_1 = document.getElementsByClassName("points")[0];
-const status_2 = document.getElementsByClassName("points")[1];
-let time = document.querySelector(".time");
-let timeLeft = 30;
+enum ValueMap {
+  Two = 2,
+  Three,
+  Four,
+  Five,
+  Six,
+  Seven,
+  Eight,
+  Nine,
+  Ten,
+  J,
+  Q,
+  K,
+  A,
+}
 
 class Cards {
   constructor(number: number, shape: string, color: string) {
@@ -44,6 +50,8 @@ class Cards {
     this.color = color;
   }
 }
+
+// Logic
 
 while (deck.length < 52) {
   counter++;
@@ -68,17 +76,19 @@ createDeckBtn.addEventListener("click", () => {
   let timer = setInterval(countdown, 1000);
 
   function countdown() {
-    if (timeLeft == -1) {
+    if (!timeLeft || !timePress) {
       clearTimeout(timer);
       shuffle.disabled = true;
-      if (player_1_deck.length > player_2_deck.length) {
+      if (player_1_deck.length > player_2_deck.length && timePress) {
         time.innerHTML = "You Won!";
       } else {
         time.innerHTML = "The Computer Won";
       }
     } else {
       time.innerHTML = timeLeft + " seconds remaining";
+      displayPress.childNodes[1].textContent = `${timePress} seconds`;
       timeLeft--;
+      timePress--;
     }
   }
 
@@ -88,16 +98,8 @@ createDeckBtn.addEventListener("click", () => {
   }, 1000);
 });
 
-// Fix Code
-
-// let timer = null;
 shuffle.addEventListener("click", () => {
-  // clearTimeout(timer);
-  // timer = setTimeout(function () {
-  //   time.innerHTML = "The Computer Won";
-  //   console.log("you lose");
-  // }, 2000);
-
+  timePress = 5;
   htmlRender();
 });
 
@@ -117,8 +119,8 @@ function htmlRender() {
   player_2.dataset.value = `${player_2_deck[random_2].number} ${player_2_deck[random_2].shape} `;
   player_2_deck[random_2].color === "black" ? (player_2.style.color = "black") : (player_2.style.color = "red");
 
-  if (valueMap[player_1_deck[random_1].number] === valueMap[player_2_deck[random_2].number]) return;
-  if (valueMap[player_1_deck[random_1].number] < valueMap[player_2_deck[random_2].number]) {
+  if (ValueMap[player_1_deck[random_1].number] === ValueMap[player_2_deck[random_2].number]) return;
+  if (ValueMap[player_1_deck[random_1].number] < ValueMap[player_2_deck[random_2].number]) {
     let transfer = player_1_deck[random_1];
     player_1_deck.splice(random_1, 1);
     player_2_deck.push(transfer);

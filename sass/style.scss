@@ -57,7 +57,9 @@
         border: 1px black solid;
         border-radius: 1rem;
       }
+
       .score {
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -73,6 +75,16 @@
           font-size: small;
           font-family: Georgia, "Times New Roman", Times, serif;
           font-style: oblique;
+        }
+        h4 {
+          position: absolute;
+          position: absolute;
+          bottom: 145px;
+          background: white;
+          border-radius: 5px;
+          padding: 5px;
+          border: 2px solid black;
+          font-size: 10px;
         }
       }
       .card {
