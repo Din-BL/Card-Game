@@ -1,6 +1,5 @@
 // Elements
 
-// const header = document.querySelector("header")!;
 const deckCreation = document.querySelector(".create_deck")! as HTMLButtonElement;
 const section = document.querySelector("section")!;
 const shuffle = document.querySelector(".shuffle")! as HTMLButtonElement;
@@ -11,41 +10,41 @@ let timeLimit = document.querySelector("h4")!;
 
 // Structures
 
-interface Card {
-  number: number;
-  shape: string;
-  color: string;
-}
-
 const VALUES: Array<string> = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 const SUITS: Array<string> = ["♠", "♣", "♥", "♦"];
 let counter = 0;
 let gameTime = 30;
 let remainingTime = 5;
-let deck: Array<Card> = [];
+let deck: Array<Cards> = [];
 let deckFlag: Array<string> = [];
 
-enum CardValue {
-  Two = 2,
-  Three,
-  Four,
-  Five,
-  Six,
-  Seven,
-  Eight,
-  Nine,
-  Ten,
-  J,
-  Q,
-  K,
-  A,
+interface CardValues {
+  [key: string]: number;
+  J: number;
+  Q: number;
+  K: number;
+  A: number;
+}
+
+const CardValue: CardValues = {
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  10: 10,
+  J: 11,
+  Q: 12,
+  K: 13,
+  A: 14
 }
 
 class Cards {
-  constructor(number: number, shape: string, color: string) {
-    this.number = number;
-    this.shape = shape;
-    this.color = color;
+  constructor(public number: string, public shape: string, public color: string) {
   }
 }
 
@@ -85,6 +84,7 @@ deckCreation.addEventListener("click", () => {
         time.innerHTML = "The Computer Won";
       }
     } else {
+      gameTime <= 5 ? time.style.color = 'red' : ''
       time.innerHTML = gameTime + " seconds remaining";
       timeLimit.childNodes[1].textContent = `${remainingTime} seconds`;
       gameTime--;
@@ -93,7 +93,7 @@ deckCreation.addEventListener("click", () => {
   }
 
   setTimeout(() => {
-    section.previousElementSibling?.style.display = "none";
+    (section.previousElementSibling as HTMLElement).style.display = "none";
     section.style.display = "grid";
   }, 1000);
 });
@@ -109,10 +109,9 @@ shuffle.addEventListener("click", () => {
 function htmlRender() {
   let card_1 = cardRender(playerElement, player);
   let card_2 = cardRender(computerElement, computer);
-  // --------------
-  // Fix This
-  // --------------
+
   if (CardValue[player[card_1].number] === CardValue[computer[card_2].number]) return;
+
   if (CardValue[player[card_1].number] < CardValue[computer[card_2].number]) {
     player.splice(card_1, 1);
     computer.push(player[card_1]);
@@ -124,7 +123,7 @@ function htmlRender() {
   section.children[3].children[3].textContent = `Computer : ${computer.length}`;
 }
 
-function cardRender(element: HTMLDivElement, card: Card[]) {
+function cardRender(element: HTMLDivElement, card: Cards[]) {
   element.style.backgroundImage = "none";
   const random = Math.floor(Math.random() * card.length);
   element.innerText = card[random].shape;

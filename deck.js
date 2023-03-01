@@ -1,6 +1,5 @@
 "use strict";
 // Elements
-// const header = document.querySelector("header")!;
 const deckCreation = document.querySelector(".create_deck");
 const section = document.querySelector("section");
 const shuffle = document.querySelector(".shuffle");
@@ -8,6 +7,7 @@ const playerElement = document.querySelector(".player");
 const computerElement = document.querySelector(".computer");
 let time = document.querySelector(".time");
 let timeLimit = document.querySelector("h4");
+// Structures
 const VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 const SUITS = ["♠", "♣", "♥", "♦"];
 let counter = 0;
@@ -15,22 +15,22 @@ let gameTime = 30;
 let remainingTime = 5;
 let deck = [];
 let deckFlag = [];
-var CardValue;
-(function (CardValue) {
-    CardValue[CardValue["Two"] = 2] = "Two";
-    CardValue[CardValue["Three"] = 3] = "Three";
-    CardValue[CardValue["Four"] = 4] = "Four";
-    CardValue[CardValue["Five"] = 5] = "Five";
-    CardValue[CardValue["Six"] = 6] = "Six";
-    CardValue[CardValue["Seven"] = 7] = "Seven";
-    CardValue[CardValue["Eight"] = 8] = "Eight";
-    CardValue[CardValue["Nine"] = 9] = "Nine";
-    CardValue[CardValue["Ten"] = 10] = "Ten";
-    CardValue[CardValue["J"] = 11] = "J";
-    CardValue[CardValue["Q"] = 12] = "Q";
-    CardValue[CardValue["K"] = 13] = "K";
-    CardValue[CardValue["A"] = 14] = "A";
-})(CardValue || (CardValue = {}));
+const CardValue = {
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+    7: 7,
+    8: 8,
+    9: 9,
+    10: 10,
+    J: 11,
+    Q: 12,
+    K: 13,
+    A: 14
+};
 class Cards {
     constructor(number, shape, color) {
         this.number = number;
@@ -72,6 +72,7 @@ deckCreation.addEventListener("click", () => {
             }
         }
         else {
+            gameTime <= 5 ? time.style.color = 'red' : '';
             time.innerHTML = gameTime + " seconds remaining";
             timeLimit.childNodes[1].textContent = `${remainingTime} seconds`;
             gameTime--;
@@ -79,8 +80,7 @@ deckCreation.addEventListener("click", () => {
         }
     }
     setTimeout(() => {
-        var _a;
-        (_a = section.previousElementSibling) === null || _a === void 0 ? void 0 : _a.style.display = "none";
+        section.previousElementSibling.style.display = "none";
         section.style.display = "grid";
     }, 1000);
 });
@@ -93,9 +93,6 @@ shuffle.addEventListener("click", () => {
 function htmlRender() {
     let card_1 = cardRender(playerElement, player);
     let card_2 = cardRender(computerElement, computer);
-    // --------------
-    // Fix This
-    // --------------
     if (CardValue[player[card_1].number] === CardValue[computer[card_2].number])
         return;
     if (CardValue[player[card_1].number] < CardValue[computer[card_2].number]) {
