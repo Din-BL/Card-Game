@@ -12,9 +12,10 @@
       margin-top: 50px;
       article {
         background-color: white;
-        width: 35%;
+        min-width: 260px;
+        max-width: 35%;
         padding: 15px;
-        font-size: 15px;
+        font-size: 70%;
         line-height: 1.5;
         margin-bottom: 15px;
         border: 4px black double;
@@ -45,7 +46,7 @@
       .time {
         height: 100%;
         width: 23%;
-        font-size: small;
+        font-size: 1vw;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -70,14 +71,15 @@
         justify-content: space-around;
         align-items: center;
         border: 2px black solid;
-        width: 8rem;
+        max-width: 8rem;
+        width: 35%;
         height: 75%;
         border-radius: 1rem;
         background-color: white;
         padding: 1rem;
         font-size: large;
         .points {
-          font-size: small;
+          font-size: 1vw;
           font-family: Georgia, "Times New Roman", Times, serif;
           font-style: oblique;
         }
@@ -88,7 +90,7 @@
           border-radius: 5px;
           padding: 5px;
           border: 2px solid black;
-          font-size: 10px;
+          font-size: 0.8vw;
         }
       }
       .card {
@@ -98,7 +100,8 @@
         align-items: center;
         height: 100%;
         background-color: white;
-        width: 8rem;
+        max-width: 8rem;
+        width: 35%;
         border-radius: 1rem;
         font-size: 5rem;
         &:before {
