@@ -1,8 +1,8 @@
 
 <div style="display: flex;">
-<img height="200" width="260" alt="צילום מסך 2023-03-02 014005" src="https://user-images.githubusercontent.com/93730629/222293676-7797f2e0-a9d1-4734-8d62-fc571fad9f69.png">
-<img  height="200" width="260" alt="צילום מסך 2023-03-02 014035" src="https://user-images.githubusercontent.com/93730629/222293679-0f1843f9-ec39-4a89-aae0-f8302a488e29.png">
-<img  height="200" width="260" alt="צילום מסך 2023-03-02 014140" src="https://user-images.githubusercontent.com/93730629/222293681-9f78fed8-1038-4d3f-b398-12a08ac78c01.png">
+<img height="210" width="260" alt="צילום מסך 2023-03-02 014005" src="https://user-images.githubusercontent.com/93730629/222293676-7797f2e0-a9d1-4734-8d62-fc571fad9f69.png">
+<img  height="210" width="260" alt="צילום מסך 2023-03-02 014035" src="https://user-images.githubusercontent.com/93730629/222293679-0f1843f9-ec39-4a89-aae0-f8302a488e29.png">
+<img  height="210" width="260" alt="צילום מסך 2023-03-02 014140" src="https://user-images.githubusercontent.com/93730629/222293681-9f78fed8-1038-4d3f-b398-12a08ac78c01.png">
 
 
 # Card-Game
