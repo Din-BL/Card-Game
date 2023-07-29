@@ -1,4 +1,10 @@
+<div style="display: flex;">
+<img height="250" width="300" alt="צילום מסך 2023-03-02 014005" src="https://user-images.githubusercontent.com/93730629/222293676-7797f2e0-a9d1-4734-8d62-fc571fad9f69.png">
+<img  height="250" width="300" alt="צילום מסך 2023-03-02 014035" src="https://user-images.githubusercontent.com/93730629/222293679-0f1843f9-ec39-4a89-aae0-f8302a488e29.png">
+<img  height="250" width="300" alt="צילום מסך 2023-03-02 014140" src="https://user-images.githubusercontent.com/93730629/222293681-9f78fed8-1038-4d3f-b398-12a08ac78c01.png">
+
 # Card-Game
+
 I completed a project based on the War card game using vanilla JS, HTML, and CSS, with a focus on using OOP principles and classes, as well as grid templates. I'm really proud of how it turned out, and it was a great opportunity for me to develop my skills in JS, OOP, and CSS.
 
 First, I used HTML and CSS with a grid template to create the basic structure and design of the game, including the card deck and game board. The grid template made it easy for me to position and align the different elements on the page, giving the game a clean and organized look.
