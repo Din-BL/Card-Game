@@ -1,5 +1,3 @@
-https://github.com/DinBoy5/Card-Game/assets/93730629/9bb0a0f2-4a67-4b6b-b135-41503e85e1de
-
 # Card-Game
 
 I completed a project based on the War card game using vanilla JS, HTML, and CSS, with a focus on using OOP principles and classes, as well as grid templates. I'm really proud of how it turned out, and it was a great opportunity for me to develop my skills in JS, OOP, and CSS.
