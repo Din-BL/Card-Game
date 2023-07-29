@@ -1,4 +1,4 @@
-https://github.com/DinBoy5/Card-Game/assets/93730629/9cd44d47-992e-47b0-9dd2-a905842e2f61
+https://github.com/DinBoy5/Card-Game/assets/93730629/9bb0a0f2-4a67-4b6b-b135-41503e85e1de
 
 # Card-Game
 
