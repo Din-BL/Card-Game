@@ -1,14 +1,17 @@
 * {
   margin: 0;
   box-sizing: border-box;
+
   main {
     position: absolute;
     width: 100%;
+
     header {
       display: flex;
       align-items: center;
       flex-direction: column;
       margin-top: 50px;
+
       article {
         background-color: white;
         min-width: 260px;
@@ -21,6 +24,7 @@
         font-family: cursive;
         border-radius: 7px;
       }
+
       .create_deck {
         padding: 10px;
         font-size: 15px;
@@ -28,12 +32,15 @@
         border-radius: 10px;
         font-family: fantasy;
         transition: 2s;
+        cursor: pointer;
+
         &:hover {
           transform: rotate(360deg) scale(1.5);
           color: rgba(190, 0, 0, 255);
         }
       }
     }
+
     section {
       margin-top: 40px;
       display: none;
@@ -58,7 +65,9 @@
         border-radius: 1rem;
         transition: 0.5s;
         font-family: cursive;
-        &:hover{
+        cursor: pointer;
+
+        &:hover {
           color: rgba(190, 0, 0, 255);
         }
       }
@@ -77,11 +86,13 @@
         background-color: white;
         padding: 1rem;
         font-size: large;
+
         .points {
           font-size: 1vw;
           font-family: Georgia, "Times New Roman", Times, serif;
           font-style: oblique;
         }
+
         h4 {
           position: absolute;
           bottom: 145px;
@@ -92,6 +103,7 @@
           font-size: 0.8vw;
         }
       }
+
       .card {
         position: relative;
         display: flex;
@@ -103,6 +115,7 @@
         width: 35%;
         border-radius: 1rem;
         font-size: 5rem;
+
         &:before {
           position: absolute;
           font-size: 28px;
@@ -110,6 +123,7 @@
           top: 0.5rem;
           left: 0.5rem;
         }
+
         &:after {
           position: absolute;
           font-size: 28px;
@@ -119,14 +133,17 @@
           transform: rotate(180deg);
         }
       }
+
       .card {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
       }
+
       .player {
         background-image: url(../img/Red.jpeg);
       }
+
       .computer {
         background-image: url(../img/Blue.jpg);
       }
