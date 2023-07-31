@@ -102,6 +102,7 @@
   height: 100%;
   background-color: white;
   max-width: 8rem;
+  min-width: 80px;
   width: 35%;
   border-radius: 1rem;
   font-size: 5rem;
