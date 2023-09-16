@@ -38,6 +38,7 @@
   color: rgb(190, 0, 0);
 }
 * main section {
+  justify-content: center;
   margin-top: 40px;
   display: none;
   grid-template-columns: repeat(2, 1fr);
@@ -46,9 +47,8 @@
   gap: 20px;
 }
 * main section .time {
-  height: 100%;
-  width: 23%;
-  font-size: 1vw;
+  padding: 10px 5px 10px 5px;
+  font-size: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +73,6 @@
   align-items: center;
   border: 2px black solid;
   max-width: 8rem;
-  width: 35%;
   height: 75%;
   border-radius: 1rem;
   background-color: white;
@@ -81,7 +80,7 @@
   font-size: large;
 }
 * main section .score .points {
-  font-size: 1vw;
+  font-size: 12px;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-style: oblique;
 }
@@ -92,7 +91,7 @@
   border-radius: 5px;
   padding: 5px;
   border: 2px solid black;
-  font-size: 0.8vw;
+  font-size: 12px;
 }
 * main section .card {
   position: relative;
@@ -126,10 +125,19 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  width: 100%;
 }
 * main section .player {
   background-image: url(../img/Red.jpeg);
 }
 * main section .computer {
   background-image: url(../img/Blue.jpg);
+}
+@media (max-width: 670px) {
+  * main section {
+    grid-template-columns: repeat(2, 120px);
+  }
+  * main section .score h4 {
+    padding: 2px;
+  }
 }/*# sourceMappingURL=style.css.map */

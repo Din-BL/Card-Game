@@ -86,7 +86,7 @@ deckCreation.addEventListener("click", () => {
     } else {
       gameTime <= 5 ? time.style.color = 'red' : ''
       time.innerHTML = gameTime + " seconds remaining";
-      timeLimit.childNodes[1].textContent = `${remainingTime} seconds`;
+      timeLimit.childNodes[1].textContent = `${remainingTime}`;
       gameTime--;
       remainingTime--;
     }
