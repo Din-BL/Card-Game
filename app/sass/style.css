@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 * main {
@@ -38,17 +39,17 @@
   color: rgb(190, 0, 0);
 }
 * main section {
+  display: none;
   justify-content: center;
   margin-top: 40px;
   padding-top: 20px;
-  display: none;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 40px 185px 185px;
   place-items: center;
   gap: 20px;
 }
-* main section .time {
-  padding: 10px 5px 10px 5px;
+* main section time {
+  padding: 10px 5px;
   font-size: 10px;
   display: flex;
   justify-content: center;
@@ -129,10 +130,10 @@
   width: 100%;
 }
 * main section .player {
-  background-image: url(../img/Red.jpeg);
+  background-image: url(../assets/Red.jpeg);
 }
 * main section .computer {
-  background-image: url(../img/Blue.jpg);
+  background-image: url(../assets/Blue.jpg);
 }
 @media (max-width: 670px) {
   * main section {

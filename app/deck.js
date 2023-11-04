@@ -4,16 +4,16 @@ var section = document.querySelector("section");
 var shuffle = document.querySelector(".shuffle");
 var playerElement = document.querySelector(".player");
 var computerElement = document.querySelector(".computer");
-var time = document.querySelector(".time");
+var time = document.querySelector("time");
 var timeLimit = document.querySelector("h4");
 // Structures
 var VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 var SUITS = ["♠", "♣", "♥", "♦"];
-var counter = 0;
-var gameTime = 30;
-var remainingTime = 5;
 var deck = [];
 var deckFlag = [];
+var gameTime = 30;
+var remainingTime = 5;
+var timer;
 var CardValue = {
     1: 1,
     2: 2,
@@ -40,57 +40,53 @@ var Cards = /** @class */ (function () {
 }());
 // Deck Creation
 while (deck.length < 52) {
-    counter++;
     var index = Math.floor(Math.random() * VALUES.length);
-    var randNum = VALUES[index];
     var randIndex = Math.floor(Math.random() * SUITS.length);
-    var color = SUITS[randIndex] === "♠" || SUITS[randIndex] === "♣" ? "black" : "red";
-    var flagVal = "".concat(randNum + " " + SUITS[randIndex]);
-    if (deckFlag.includes(flagVal))
+    var flagCard = "".concat(VALUES[index] + " " + SUITS[randIndex]);
+    var color = (SUITS[randIndex] === "♠" || SUITS[randIndex] === "♣") ? "black" : "red";
+    if (deckFlag.includes(flagCard))
         continue;
-    deckFlag.push(flagVal);
-    var card = new Cards(randNum, SUITS[randIndex], color);
+    deckFlag.push(flagCard);
+    var card = new Cards(VALUES[index], SUITS[randIndex], color);
     deck.push(card);
 }
-// Logic
+var player = deck.slice(0, deck.length / 2);
+var computer = deck.slice(-deck.length / 2);
+// Events
 deckCreation.addEventListener("click", function () {
     deckCreation.style.opacity = "0";
     setTimeout(function () {
         time.style.backgroundColor = "white";
         time.style.border = "2px solid black";
-    }, 1000);
-    var timer = setInterval(countdown, 1000);
-    function countdown() {
-        if (!gameTime || remainingTime == -1) {
-            clearTimeout(timer);
-            shuffle.disabled = true;
-            if (player.length > computer.length && remainingTime !== -1) {
-                time.innerHTML = "You Won!";
-            }
-            else {
-                time.innerHTML = "The Computer Won";
-            }
-        }
-        else {
-            gameTime <= 5 ? time.style.color = 'red' : '';
-            time.innerHTML = gameTime + " seconds remaining";
-            timeLimit.childNodes[1].textContent = "".concat(remainingTime);
-            gameTime--;
-            remainingTime--;
-        }
-    }
-    setTimeout(function () {
-        section.previousElementSibling.style.display = "none";
         section.style.display = "grid";
+        section.previousElementSibling.style.display = "none";
     }, 1000);
+    timer = setInterval(countdown, 1000);
 });
-var player = deck.slice(0, deck.length / 2);
-var computer = deck.slice(-deck.length / 2);
-// Play Button
 shuffle.addEventListener("click", function () {
     remainingTime = 5;
     htmlRender();
 });
+// Game's Logic
+function countdown() {
+    if (!gameTime || remainingTime == -1) {
+        clearInterval(timer);
+        shuffle.disabled = true;
+        if (player.length > computer.length && remainingTime !== -1) {
+            time.innerHTML = "You Won!";
+        }
+        else {
+            time.innerHTML = "The Computer Won";
+        }
+    }
+    else {
+        gameTime <= 5 ? time.style.color = 'red' : '';
+        time.innerHTML = gameTime + " seconds remaining";
+        timeLimit.childNodes[1].textContent = "".concat(remainingTime);
+        gameTime--;
+        remainingTime--;
+    }
+}
 function htmlRender() {
     var card_1 = cardRender(playerElement, player);
     var card_2 = cardRender(computerElement, computer);
@@ -107,11 +103,11 @@ function htmlRender() {
     section.children[3].children[2].textContent = "Player : ".concat(player.length);
     section.children[3].children[3].textContent = "Computer : ".concat(computer.length);
 }
-function cardRender(element, card) {
+function cardRender(element, cards) {
+    var randomCard = Math.floor(Math.random() * cards.length);
     element.style.backgroundImage = "none";
-    var random = Math.floor(Math.random() * card.length);
-    element.innerText = card[random].shape;
-    element.dataset.value = "".concat(card[random].number, " ").concat(card[random].shape, " ");
-    card[random].color === "black" ? (element.style.color = "black") : (element.style.color = "red");
-    return random;
+    element.innerText = cards[randomCard].shape;
+    element.dataset.value = "".concat(cards[randomCard].number, " ").concat(cards[randomCard].shape, " ");
+    element.style.color = "".concat(cards[randomCard].color === "black" ? 'black' : 'red');
+    return randomCard;
 }
